@@ -25,7 +25,7 @@ export function sortByAge(users) {
       return 1;
     }
     if (a.age === b.age) {
-      // Alphabetical order breaks tie
+      // Alphabetical Order breaks tie
       if (a.name < b.name) {
         return -1;
       }
