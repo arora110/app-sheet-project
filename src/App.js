@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       users: [],
       hasResults: false,
+      buttonText: 'Get Results',
     };
   }
 
@@ -29,7 +30,7 @@ class App extends Component {
             />
           ) : (
             <div className="button__container" onClick={this.handleClick}>
-              <button className="button">Get Results</button>
+              <button className="button">{this.state.buttonText}</button>
             </div>
           )}
         </div>
@@ -54,12 +55,16 @@ class App extends Component {
         params,
       })
       .then(response => {
-        const token = response.data.token ? response.data.token : '';
-        if (token) {
-          this.fetchUserIds(token);
+        const newToken = response.data.token ? response.data.token : '';
+        if (newToken) {
+          this.fetchUserIds(newToken);
         }
         if (response.data && response.data.result) {
-          this.handleIdList(response.data.result, token);
+          this.handleIdList(response.data.result, newToken);
+        } else if (token) {
+          this.setState({
+            buttonText: 'No Users Found',
+          });
         }
       })
       .catch(error => {
