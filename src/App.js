@@ -85,7 +85,6 @@ class App extends Component {
     });
     Promise.all(promiseArr).then(() => {
       if (!token) {
-        console.log(this.state.users);
         this.setState({
           users: sortAlphabetically(sortByAge(this.state.users).slice(0, 5)),
           hasResults: true,
